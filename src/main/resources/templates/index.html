@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>フリーエンジニアの相場</title>
+    <link rel="stylesheet" th:href="@{/css/app.css}">
+</head>
+<body>
+<header class="topbar">
+    <div>
+        <p class="eyebrow">Freelance Engineer</p>
+        <h1>フリーエンジニアの相場</h1>
+    </div>
+    <a class="button primary" th:href="@{/reports/new}">新規登録</a>
+</header>
+
+<main class="container">
+    <section class="dashboard">
+        <div class="metric">
+            <span>検索結果</span>
+            <strong th:text="|${resultCount}件|">0件</strong>
+        </div>
+        <div class="metric">
+            <span>平均単価</span>
+            <strong th:text="${averageUnitPrice == '-' ? '-' : averageUnitPrice + '万円'}">75.0万円</strong>
+        </div>
+    </section>
+
+    <section class="stats-grid">
+        <div class="stat-panel">
+            <h2>年齢別</h2>
+            <div class="stat-list">
+                <div th:each="stat : ${ageStats}">
+                    <span th:text="${stat.label}">40代</span>
+                    <strong th:text="|${stat.count}件|">0件</strong>
+                </div>
+            </div>
+        </div>
+        <div class="stat-panel">
+            <h2>勤務形態別</h2>
+            <div class="stat-list">
+                <div th:each="stat : ${workStyleStats}">
+                    <span th:text="${stat.label}">フルリモート</span>
+                    <strong th:text="|${stat.count}件|">0件</strong>
+                </div>
+            </div>
+        </div>
+        <div class="stat-panel wide">
+            <h2>業種別</h2>
+            <div class="stat-list compact">
+                <div th:each="stat : ${roleStats}">
+                    <span th:text="${stat.label}">SE・プログラマ・開発エンジニア</span>
+                    <strong th:text="|${stat.count}件|">0件</strong>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="search-panel">
+        <form class="search-form" method="get" th:action="@{/}">
+            <label>
+                <span>年齢</span>
+                <select name="ageGroup">
+                    <option value="">すべて</option>
+                    <option th:each="ageGroup : ${ageGroups}"
+                            th:value="${ageGroup.key}"
+                            th:text="${ageGroup.label}"
+                            th:selected="${ageGroup.key == selectedAgeGroup}"></option>
+                </select>
+            </label>
+            <label>
+                <span>勤務形態</span>
+                <select name="workStyle">
+                    <option value="">すべて</option>
+                    <option th:each="workStyle : ${workStyles}"
+                            th:value="${workStyle}"
+                            th:text="${workStyle.label}"
+                            th:selected="${workStyle == selectedWorkStyle}"></option>
+                </select>
+            </label>
+            <label>
+                <span>業種</span>
+                <select name="role">
+                    <option value="">すべて</option>
+                    <option th:each="roleOption : ${roleOptions}"
+                            th:value="${roleOption}"
+                            th:text="${roleOption}"
+                            th:selected="${roleOption == selectedRole}"></option>
+                </select>
+            </label>
+            <div class="search-actions">
+                <a class="button ghost" th:href="@{/}">クリア</a>
+                <button class="button primary" type="submit">検索</button>
+            </div>
+        </form>
+    </section>
+
+    <section class="result-heading">
+        <h2>検索結果</h2>
+    </section>
+
+    <section class="table-wrap" th:if="${!#lists.isEmpty(reports)}">
+        <table>
+            <thead>
+            <tr>
+                <th>会社</th>
+                <th>年齢</th>
+                <th>業種</th>
+                <th>単価</th>
+                <th>勤務形態</th>
+                <th>契約形態</th>
+                <th>担当役割</th>
+                <th>登録日</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="report : ${reports}">
+                <td data-label="会社" th:text="${#strings.isEmpty(report.company) ? '-' : report.company}">○○</td>
+                <td data-label="年齢" th:text="|${report.age}歳|">48歳</td>
+                <td data-label="業種" th:text="${report.role}">SE・プログラマ・開発エンジニア</td>
+                <td data-label="単価" th:text="|${report.unitPrice}万円|">75万円</td>
+                <td data-label="勤務形態" th:text="${report.workStyle != null ? report.workStyle.label : '-'}">フルリモート</td>
+                <td data-label="契約形態" th:text="${report.contractType != null ? report.contractType.label : '-'}">業務委託</td>
+                <td data-label="担当役割">
+                    <span class="badge" th:text="${report.assignedRole != null ? report.assignedRole.label : '-'}">SE</span>
+                </td>
+                <td data-label="登録日" th:text="${#temporals.format(report.createdAt, 'yyyy/MM/dd HH:mm')}">2026/08/03</td>
+                <td class="actions">
+                    <a class="button ghost" th:href="@{/reports/{id}(id=${report.id})}">詳細</a>
+                    <a class="button ghost" th:href="@{/reports/{id}/edit(id=${report.id})}">編集</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section class="empty" th:if="${#lists.isEmpty(reports)}">
+        <h2>該当するレポートがありません</h2>
+        <a class="button primary" th:href="@{/reports/new}">新規登録</a>
+    </section>
+</main>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title th:text="|${#strings.isEmpty(report.company) ? '会社未入力' : report.company} フリーエンジニアの相場|">詳細</title>
+    <link rel="stylesheet" th:href="@{/css/app.css}">
+</head>
+<body>
+<header class="topbar">
+    <div>
+        <p class="eyebrow">Interview Report</p>
+        <h1 th:text="${#strings.isEmpty(report.company) ? '会社未入力' : report.company}">○○</h1>
+    </div>
+    <div class="header-actions">
+        <a class="button ghost" th:href="@{/}">一覧へ戻る</a>
+        <a class="button primary" th:href="@{/reports/{id}/edit(id=${report.id})}">編集</a>
+    </div>
+</header>
+
+<main class="container narrow">
+    <div class="notice" th:if="${message}" th:text="${message}"></div>
+
+    <section class="detail-panel">
+        <div class="detail-grid">
+            <div>
+                <span>年齢</span>
+                <strong th:text="|${report.age}歳|">48歳</strong>
+            </div>
+            <div>
+                <span>職種</span>
+                <strong th:text="${report.role}">Java</strong>
+            </div>
+            <div>
+                <span>単価</span>
+                <strong th:text="|${report.unitPrice}万円|">75万円</strong>
+            </div>
+            <div>
+                <span>勤務形態</span>
+                <strong th:text="${report.workStyle != null ? report.workStyle.label : '-'}">フルリモート</strong>
+            </div>
+            <div>
+                <span>契約形態</span>
+                <strong th:text="${report.contractType != null ? report.contractType.label : '-'}">業務委託</strong>
+            </div>
+            <div>
+                <span>担当役割</span>
+                <strong class="badge" th:text="${report.assignedRole != null ? report.assignedRole.label : '-'}">SE</strong>
+            </div>
+        </div>
+
+        <div class="project-summary">
+            <span>案件概要</span>
+            <p th:text="${#strings.isEmpty(report.projectSummary) ? '-' : report.projectSummary}">Spring Boot経験</p>
+        </div>
+
+        <div class="meta">
+            <span th:text="|登録: ${#temporals.format(report.createdAt, 'yyyy/MM/dd HH:mm')}|">登録</span>
+            <span th:text="|更新: ${#temporals.format(report.updatedAt, 'yyyy/MM/dd HH:mm')}|">更新</span>
+        </div>
+    </section>
+
+    <form th:action="@{/reports/{id}/delete(id=${report.id})}" method="post" onsubmit="return confirm('このレポートを削除しますか？');">
+        <button class="button danger" type="submit">削除</button>
+    </form>
+</main>
+</body>
+</html>
