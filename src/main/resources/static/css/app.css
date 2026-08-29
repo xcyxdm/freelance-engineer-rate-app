@@ -144,15 +144,19 @@ a {
 .sample-projects {
     background: #f3f6f8;
     border-top: 1px solid var(--line);
+    padding: 32px clamp(20px, 5vw, 56px) 52px;
 }
 
 .sample-projects-inner {
+    border: 1px solid var(--line);
+    border-radius: 8px;
     display: grid;
     gap: 1px;
+    overflow: hidden;
 }
 
 .sample-projects h2 {
-    font-size: clamp(26px, 4vw, 38px);
+    font-size: clamp(22px, 3vw, 30px);
     line-height: 1.2;
     margin: 6px 0 0;
 }
