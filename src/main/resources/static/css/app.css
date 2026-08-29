@@ -193,6 +193,11 @@ a {
     margin: 0;
 }
 
+.sample-note {
+    font-size: 13px;
+    margin-top: 8px;
+}
+
 .sample-item dl {
     display: grid;
     gap: 14px;
