@@ -521,12 +521,6 @@ textarea:focus {
     margin: 0;
 }
 
-.resume-summary {
-    color: #40505f;
-    font-size: 16px;
-    margin: 0;
-}
-
 .skill-categories {
     display: grid;
     gap: 18px;
