@@ -9,10 +9,6 @@
 <body class="home-page">
 <header class="site-header">
     <a class="brand" th:href="@{/}">Freelance Engineer</a>
-    <nav class="site-nav" aria-label="メインナビゲーション">
-        <a th:href="@{/resume}">履歴シート</a>
-        <a th:href="@{/rates}">相場データ</a>
-    </nav>
 </header>
 
 <main>
@@ -25,8 +21,7 @@
                 Spring Bootを中心に、クラウド環境で動く保守しやすいアプリケーション作りを得意としています。
             </p>
             <div class="hero-actions">
-                <a class="button primary" th:href="@{/resume}">履歴シートを見る</a>
-                <a class="button ghost" th:href="@{/rates}">相場データを見る</a>
+                <a class="button primary" th:href="@{/resume}">主催者の個人履歴</a>
             </div>
         </div>
         <div class="profile-visual" aria-label="フリーエンジニアの作業イメージ">
@@ -49,6 +44,31 @@
             <span>03</span>
             <strong>クラウド対応</strong>
             <p>DockerやAWSを使った配置、運用改善まで対応します。</p>
+        </div>
+    </section>
+
+    <section class="sample-projects">
+        <div class="sample-projects-inner">
+            <p class="eyebrow">Sample Project</p>
+            <h2>プロジェクトのサンプル</h2>
+            <div class="sample-item">
+                <div>
+                    <h3><a th:href="@{/rates}">サンプル１：相場データ</a></h3>
+                    <p>
+                        フリーエンジニアの面談レポートを登録し、年齢別、勤務形態別、業種別の統計と検索結果を確認できるWebアプリケーションです。
+                    </p>
+                </div>
+                <dl>
+                    <div>
+                        <dt>概要</dt>
+                        <dd>会社、年齢、職種、単価、勤務形態、契約形態、担当役割、案件概要を登録し、相場感を一覧・統計で確認します。</dd>
+                    </div>
+                    <div>
+                        <dt>構成</dt>
+                        <dd>Spring Boot、PostgreSQL、Docker Compose、Git、AWS Lightsail</dd>
+                    </div>
+                </dl>
+            </div>
         </div>
     </section>
 </main>

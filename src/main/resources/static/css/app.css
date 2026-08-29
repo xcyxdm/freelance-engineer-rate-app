@@ -141,6 +141,79 @@ a {
     color: var(--muted);
 }
 
+.sample-projects {
+    background: #f3f6f8;
+    border-top: 1px solid var(--line);
+    padding: 44px clamp(20px, 5vw, 56px) 64px;
+}
+
+.sample-projects-inner {
+    margin: 0 auto;
+    max-width: 1120px;
+}
+
+.sample-projects h2 {
+    font-size: clamp(26px, 4vw, 38px);
+    line-height: 1.2;
+    margin: 6px 0 20px;
+}
+
+.sample-item {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    display: grid;
+    gap: 28px;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    padding: 26px;
+}
+
+.sample-item h3 {
+    font-size: 22px;
+    margin: 0 0 10px;
+}
+
+.sample-item h3 a {
+    color: var(--primary);
+}
+
+.sample-item h3 a:hover {
+    color: var(--primary-dark);
+}
+
+.sample-item p {
+    color: var(--muted);
+    margin: 0;
+}
+
+.sample-item dl {
+    display: grid;
+    gap: 14px;
+    margin: 0;
+}
+
+.sample-item dl div {
+    border-top: 1px solid var(--line);
+    display: grid;
+    gap: 8px;
+    grid-template-columns: 90px minmax(0, 1fr);
+    padding-top: 14px;
+}
+
+.sample-item dl div:first-child {
+    border-top: 0;
+    padding-top: 0;
+}
+
+.sample-item dt {
+    color: var(--muted);
+    font-weight: 800;
+}
+
+.sample-item dd {
+    margin: 0;
+}
+
 .topbar {
     align-items: center;
     background: var(--surface);
@@ -571,6 +644,8 @@ textarea:focus {
 
     .profile-hero,
     .strength-band,
+    .sample-item,
+    .sample-item dl div,
     .skill-categories,
     .resume-block dl div {
         grid-template-columns: 1fr;
