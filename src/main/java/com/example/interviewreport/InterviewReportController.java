@@ -71,6 +71,16 @@ public class InterviewReportController {
     }
 
     @GetMapping("/")
+    public String home() {
+        return "home";
+    }
+
+    @GetMapping("/resume")
+    public String resume() {
+        return "resume";
+    }
+
+    @GetMapping("/rates")
     public String index(
             @RequestParam(required = false) String ageGroup,
             @RequestParam(required = false) String workStyle,
@@ -101,6 +111,11 @@ public class InterviewReportController {
         return "form";
     }
 
+    @GetMapping("/reports")
+    public String reports() {
+        return "redirect:/rates";
+    }
+
     @PostMapping("/reports")
     public String create(
             @Valid @ModelAttribute("form") InterviewReportForm form,
@@ -118,7 +133,7 @@ public class InterviewReportController {
         form.copyTo(report);
         repository.save(report);
         redirectAttributes.addFlashAttribute("message", "登録しました。");
-        return "redirect:/";
+        return "redirect:/rates";
     }
 
     @GetMapping("/reports/{id}")
@@ -162,7 +177,7 @@ public class InterviewReportController {
     public String delete(@PathVariable Long id, RedirectAttributes redirectAttributes) {
         repository.delete(findReport(id));
         redirectAttributes.addFlashAttribute("message", "削除しました。");
-        return "redirect:/";
+        return "redirect:/rates";
     }
 
     private InterviewReport findReport(Long id) {

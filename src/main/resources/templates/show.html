@@ -13,7 +13,7 @@
         <h1 th:text="${#strings.isEmpty(report.company) ? '会社未入力' : report.company}">○○</h1>
     </div>
     <div class="header-actions">
-        <a class="button ghost" th:href="@{/}">一覧へ戻る</a>
+        <a class="button ghost" th:href="@{/rates}">一覧へ戻る</a>
         <a class="button primary" th:href="@{/reports/{id}/edit(id=${report.id})}">編集</a>
     </div>
 </header>

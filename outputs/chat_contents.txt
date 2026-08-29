@@ -1,0 +1,271 @@
+今のチャット内容メモ
+作成日: 2026-08-20
+
+対象フォルダ:
+C:\Users\jyo\Documents\Codex\2026-08-03\1-48-java-75-spring-boot
+
+概要:
+このチャットでは、フリーエンジニアの単価・条件・職種などを登録し、統計と検索ができるSpring Bootアプリを作成し、Docker Composeで起動できる構成にした。
+
+1. 最初の要望
+- フリーエンジニアの面談レポートサイトを作りたい。
+- 登録情報:
+  - 会社
+  - 年齢
+  - 職種
+  - 単価
+  - 案件概要
+  - 結果
+- 構成:
+  - Spring Boot
+  - PostgreSQL
+  - Docker Compose
+  - Git
+- 目標:
+  - docker compose up だけでアプリが起動すること。
+
+2. 作成したアプリ構成
+- Spring Boot 3
+- PostgreSQL
+- Docker Compose
+- Flyway
+- Thymeleaf
+- Dockerfile
+- docker-compose.yml
+- Gitリポジトリ初期化
+
+主なファイル:
+- pom.xml
+- Dockerfile
+- docker-compose.yml
+- README.md
+- src/main/java/com/example/interviewreport/
+- src/main/resources/templates/
+- src/main/resources/static/css/app.css
+- src/main/resources/db/migration/
+
+3. Docker構成
+docker-compose.yml では2つのサービスを定義した。
+
+db:
+- image: postgres:16-alpine
+- container_name: interview-report-db
+- DB名: interview_reports
+- ユーザー: app
+- パスワード: app_password
+- ポート: 5432:5432
+- volume: postgres_data
+
+app:
+- build: .
+- container_name: interview-report-app
+- DBがhealthyになってから起動
+- 環境変数でDB接続先を指定
+- ポート: 8081:8080
+
+ブラウザURL:
+http://localhost:8081
+
+4. Docker起動時の対応
+最初に localhost:8080 を開くと EDB/Postgres の別サービスが表示されたため、アプリ側のホストポートを8081に変更した。
+
+変更:
+docker-compose.yml
+ports:
+  - "8081:8080"
+
+5. Docker Desktop関連の説明
+- Docker Desktop が起動していない場合、以下のエラーが出た。
+  unable to get image 'postgres:16-alpine': failed to connect to the docker API at npipe:////./pipe/dockerDesktopLinuxEngine
+- 対応:
+  - Docker Desktopを起動
+  - Engine running になるまで待つ
+  - docker compose up --build を再実行
+
+6. Dockerの場所について説明
+- Docker Desktopアプリ本体は、ユーザー環境では以下にあった。
+  C:\Users\jyo\AppData\Local\Programs\DockerDesktop
+- Dockerの実データ、イメージ、コンテナ、volumeはWSL2側に置かれることがある。
+- \\wsl$\ はWindowsからWSLのLinuxファイルシステムを見る特殊パス。
+- PostgreSQLのvolumeはDocker内部にあり、通常は直接編集しない方がよい。
+
+7. Docker volumeについて
+確認されたvolume:
+1-48-java-75-spring-boot_postgres_data
+
+これはPostgreSQLのDBデータ保存用。
+docker-compose.yml の postgres_data から作られ、Composeがプロジェクト名を付けている。
+
+確認コマンド:
+docker volume inspect 1-48-java-75-spring-boot_postgres_data
+
+8. eclipse-temurin:21-jreについて
+- Spring Bootアプリを実行するためのJava 21実行環境。
+- Dockerfileでは2段階ビルドにした。
+
+ビルド用:
+maven:3.9.9-eclipse-temurin-21
+
+実行用:
+eclipse-temurin:21-jre
+
+Spring Bootアプリは内蔵Tomcatを含むjarとして作られ、java -jar app.jar で起動する。
+そのため、TomcatイメージではなくJava実行環境の eclipse-temurin:21-jre を使う。
+
+9. eclipse-temurin:21-jre の代替
+代替候補:
+- amazoncorretto:21
+- azul/zulu-openjdk:21-jre
+- ibm-semeru-runtimes:open-21-jre
+- bellsoft/liberica-openjre-alpine:21
+- openjdk:21-jdk
+
+ただし、特別な理由がなければ eclipse-temurin:21-jre のままでよいと説明した。
+
+10. 登録画面の変更
+職種を自由入力からリスト選択に変更した。
+
+職種リスト:
+- SE・プログラマ・開発エンジニア
+- ネットワーク・サーバーエンジニア
+- セキュリティエンジニア
+- PMO・SEアシスタント
+- テストエンジニア（評価・検証）
+- ヘルプデスク・テクニカルサポート・OAインストラクター
+- FAE・セールスエンジニア・プリセールス
+- AIエンジニア・データサイエンティスト
+
+単価:
+- 5万円刻みに変更
+- 画面の step=5
+- サーバ側バリデーションも追加
+
+勤務形態:
+- フルリモート
+- 部分リモート
+- フル出勤
+
+会社と案件概要:
+- 必須ではなくした
+- 会社欄を案件概要の上に移動
+
+11. トップページ・一覧画面の変更
+トップページを「統計 + 検索 + 検索結果一覧」に変更した。
+
+統計:
+- 年齢別
+- 勤務形態別
+- 業種別
+- 平均単価
+
+検索:
+- 年齢
+- 勤務形態
+- 業種
+
+検索結果:
+- 以前の一覧画面を検索結果として表示するようにした。
+
+12. タイトルと項目名の変更
+タイトル:
+- 「面談レポート登録」から「フリーエンジニアの相場」に変更
+
+「何回目の面談」を「契約形態」に変更。
+契約形態リスト:
+- 業務委託
+- 契約社員
+- 派遣
+
+「結果」を「担当役割」に変更。
+担当役割リスト:
+- PM
+- PMO
+- リーダー
+- SE
+- PG
+
+既存の平均面談回数は、項目廃止に合わせて平均単価に変更した。
+
+13. エラー対応
+登録後に Whitelabel Error Page が表示された。
+原因:
+- 一覧画面テンプレートの勤務形態表示行が崩れていた。
+
+対応:
+- テンプレートを修正
+- 任意項目が空でも落ちないように表示を調整
+- error.html を追加し、英語のWhitelabelではなく日本語エラーページを表示するようにした。
+
+14. テストについて
+src/test のJavaは、Spring Bootアプリが最低限起動できるか確認するための自動テスト。
+
+主なファイル:
+src/test/java/com/example/interviewreport/InterviewReportApplicationTests.java
+
+役割:
+- Spring Boot設定が壊れていないか確認
+- EntityやRepository設定が致命的に間違っていないか確認
+- テスト用DB設定で起動できるか確認
+
+実行方法:
+mvn test
+
+Dockerだけで実行する場合:
+docker run --rm -v "%cd%:/workspace" -w /workspace maven:3.9.9-eclipse-temurin-21 mvn test
+
+15. GitHubへ上げる手順
+手順:
+cd C:\Users\jyo\Documents\Codex\2026-08-03\1-48-java-75-spring-boot
+git status
+git add .
+git commit -m "Create freelance engineer rate app"
+git branch -M main
+git remote add origin https://github.com/xcyxdm/freelance-engineer-rate-app.git
+git push -u origin main
+
+Gitのdubious ownershipエラーが出た。
+対応:
+git config --global --add safe.directory C:/Users/jyo/Documents/Codex/2026-08-03/1-48-java-75-spring-boot
+
+GitHub push時のエラー:
+- Repository not found
+- Permission denied / 403
+
+説明:
+- GitHub側にリポジトリが存在しない
+- remote URLのユーザー名が違う
+- 認証しているGitHubアカウントに権限がない
+
+対処:
+- GitHubで freelance-engineer-rate-app リポジトリを作成
+- OwnerとRepository nameを確認
+- Windows資格情報マネージャーで古いGitHub認証を削除して再ログイン
+
+16. よく使うコマンド
+起動:
+cd C:\Users\jyo\Documents\Codex\2026-08-03\1-48-java-75-spring-boot
+docker compose up --build
+
+停止:
+docker compose down
+
+DBデータも削除して停止:
+docker compose down -v
+
+コンテナ確認:
+docker compose ps
+
+volume確認:
+docker volume ls
+docker volume inspect 1-48-java-75-spring-boot_postgres_data
+
+Git確認:
+git status
+git remote -v
+
+17. 注意点
+- ブラウザで見るURLは http://localhost:8081
+- localhost:8080 は別サービスが使っていたため、このアプリでは使わない。
+- PostgreSQLのDocker volumeを直接編集するとDBが壊れる可能性がある。
+- GitHubにpushするには、リポジトリのOwnerと現在認証しているGitHubユーザーが一致している必要がある。
+

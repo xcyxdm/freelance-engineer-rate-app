@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>フリーエンジニア ポートフォリオ</title>
+    <link rel="stylesheet" th:href="@{/css/app.css}">
+</head>
+<body class="home-page">
+<header class="site-header">
+    <a class="brand" th:href="@{/}">Freelance Engineer</a>
+    <nav class="site-nav" aria-label="メインナビゲーション">
+        <a th:href="@{/resume}">履歴シート</a>
+        <a th:href="@{/rates}">相場データ</a>
+    </nav>
+</header>
+
+<main>
+    <section class="profile-hero">
+        <div class="profile-copy">
+            <p class="eyebrow">Java / Spring Boot / AWS</p>
+            <h1>フリーエンジニアとして、設計から運用まで伴走します。</h1>
+            <p>
+                業務要件をほどき、堅実な設計と実装でサービスを前に進めるバックエンドエンジニアです。
+                Spring Bootを中心に、クラウド環境で動く保守しやすいアプリケーション作りを得意としています。
+            </p>
+            <div class="hero-actions">
+                <a class="button primary" th:href="@{/resume}">履歴シートを見る</a>
+                <a class="button ghost" th:href="@{/rates}">相場データを見る</a>
+            </div>
+        </div>
+        <div class="profile-visual" aria-label="フリーエンジニアの作業イメージ">
+            <img th:src="@{/img/freelance-engineer-hero.png}" alt="フリーエンジニアの作業イメージ">
+        </div>
+    </section>
+
+    <section class="strength-band">
+        <div>
+            <span>01</span>
+            <strong>業務理解</strong>
+            <p>要件、制約、現場の運用を踏まえて実装に落とし込みます。</p>
+        </div>
+        <div>
+            <span>02</span>
+            <strong>バックエンド開発</strong>
+            <p>Java、Spring Boot、PostgreSQLを中心に堅実に構築します。</p>
+        </div>
+        <div>
+            <span>03</span>
+            <strong>クラウド対応</strong>
+            <p>DockerやAWSを使った配置、運用改善まで対応します。</p>
+        </div>
+    </section>
+</main>
+</body>
+</html>

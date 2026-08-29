@@ -12,7 +12,10 @@
         <p class="eyebrow">Freelance Engineer</p>
         <h1>フリーエンジニアの相場</h1>
     </div>
-    <a class="button primary" th:href="@{/reports/new}">新規登録</a>
+    <div class="header-actions">
+        <a class="button ghost" th:href="@{/}">TOPへ戻る</a>
+        <a class="button primary" th:href="@{/reports/new}">新規登録</a>
+    </div>
 </header>
 
 <main class="container">
@@ -58,7 +61,7 @@
     </section>
 
     <section class="search-panel">
-        <form class="search-form" method="get" th:action="@{/}">
+        <form class="search-form" method="get" th:action="@{/rates}">
             <label>
                 <span>年齢</span>
                 <select name="ageGroup">
@@ -90,7 +93,7 @@
                 </select>
             </label>
             <div class="search-actions">
-                <a class="button ghost" th:href="@{/}">クリア</a>
+                <a class="button ghost" th:href="@{/rates}">クリア</a>
                 <button class="button primary" type="submit">検索</button>
             </div>
         </form>
