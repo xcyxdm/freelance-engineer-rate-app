@@ -117,7 +117,7 @@ a {
     border-top: 1px solid var(--line);
     display: grid;
     gap: 1px;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
 .strength-band > div {
@@ -165,14 +165,14 @@ a {
 .sample-item {
     align-items: start;
     background: #ffffff;
-    display: flex;
-    gap: 22px;
+    display: grid;
+    gap: 28px;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
     padding: 28px clamp(20px, 4vw, 42px);
 }
 
 .sample-item h3 {
     font-size: 22px;
-    flex: 0 0 260px;
     margin: 0;
 }
 
@@ -186,6 +186,31 @@ a {
 
 .sample-item p {
     color: var(--muted);
+    margin: 0;
+}
+
+.sample-item dl {
+    display: grid;
+    gap: 14px;
+    margin: 0;
+}
+
+.sample-item dl div {
+    background: #f8fafc;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    display: grid;
+    gap: 8px;
+    grid-template-columns: 90px minmax(0, 1fr);
+    padding: 14px;
+}
+
+.sample-item dt {
+    color: var(--muted);
+    font-weight: 800;
+}
+
+.sample-item dd {
     margin: 0;
 }
 
@@ -619,17 +644,11 @@ textarea:focus {
 
     .profile-hero,
     .strength-band,
+    .sample-item,
+    .sample-item dl div,
     .skill-categories,
     .resume-block dl div {
         grid-template-columns: 1fr;
-    }
-
-    .sample-item {
-        flex-direction: column;
-    }
-
-    .sample-item h3 {
-        flex-basis: auto;
     }
 
     .profile-hero {
