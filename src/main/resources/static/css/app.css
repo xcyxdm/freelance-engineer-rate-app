@@ -632,6 +632,10 @@ textarea:focus {
     width: 25%;
 }
 
+.period-column {
+    display: none;
+}
+
 .career-note {
     color: var(--muted);
     font-size: 13px;
