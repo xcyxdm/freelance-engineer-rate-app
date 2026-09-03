@@ -162,8 +162,19 @@ a {
 }
 
 .sample-heading {
+    align-items: center;
     background: #eef6f2;
+    display: grid;
+    gap: 24px;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
     padding: 32px clamp(20px, 4vw, 42px);
+}
+
+.sample-heading-note {
+    color: #40505f;
+    font-size: 14px;
+    font-weight: 700;
+    margin: 0;
 }
 
 .sample-item {
@@ -657,6 +668,7 @@ textarea:focus {
 
     .profile-hero,
     .strength-band,
+    .sample-heading,
     .sample-item,
     .sample-item dl div,
     .skill-categories,
