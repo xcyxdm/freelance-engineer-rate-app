@@ -20,7 +20,7 @@ body {
     background: var(--bg);
     color: var(--text);
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    line-height: 1.6;
+    line-height: 1.5;
 }
 
 a {
@@ -39,7 +39,7 @@ a {
     display: flex;
     justify-content: space-between;
     gap: 24px;
-    padding: 12px clamp(20px, 5vw, 56px);
+    padding: 10px clamp(20px, 5vw, 56px);
     position: sticky;
     top: 0;
     z-index: 10;
@@ -67,10 +67,10 @@ a {
 .profile-hero {
     align-items: center;
     display: grid;
-    gap: 40px;
+    gap: 28px;
     grid-template-columns: minmax(0, 1.08fr) minmax(320px, 0.92fr);
     min-height: 0;
-    padding: clamp(26px, 4vw, 48px) clamp(20px, 5vw, 56px) clamp(28px, 4vw, 52px);
+    padding: clamp(18px, 3vw, 34px) clamp(20px, 5vw, 56px) clamp(18px, 3vw, 34px);
 }
 
 .profile-copy {
@@ -78,14 +78,14 @@ a {
 }
 
 .profile-copy h1 {
-    font-size: clamp(32px, 5vw, 54px);
-    line-height: 1.12;
-    margin: 8px 0 18px;
+    font-size: clamp(30px, 4.4vw, 48px);
+    line-height: 1.1;
+    margin: 6px 0 14px;
 }
 
 .profile-copy p:not(.eyebrow) {
     color: #40505f;
-    font-size: 17px;
+    font-size: 16px;
     max-width: 680px;
 }
 
@@ -93,14 +93,14 @@ a {
     display: flex;
     flex-wrap: wrap;
     gap: 12px;
-    margin-top: 20px;
+    margin-top: 16px;
 }
 
 .profile-visual {
     background: #ffffff;
     border: 1px solid var(--line);
     border-radius: 8px;
-    min-height: 330px;
+    min-height: 280px;
     box-shadow: 0 24px 70px rgba(23, 32, 42, 0.18);
     overflow: hidden;
 }
@@ -108,7 +108,7 @@ a {
 .profile-visual img {
     display: block;
     height: 100%;
-    min-height: 330px;
+    min-height: 280px;
     object-fit: cover;
     width: 100%;
 }
@@ -122,8 +122,8 @@ a {
 
 .strength-band > div {
     background: #ffffff;
-    min-height: 160px;
-    padding: 24px clamp(18px, 3vw, 32px);
+    min-height: 128px;
+    padding: 18px clamp(16px, 2.5vw, 26px);
 }
 
 .strength-band span {
@@ -133,13 +133,15 @@ a {
 
 .strength-band strong {
     display: block;
-    font-size: 20px;
-    margin-top: 8px;
+    font-size: 18px;
+    margin-top: 5px;
 }
 
 .strength-band p {
     color: var(--muted);
+    font-size: 14px;
     margin-bottom: 0;
+    margin-top: 8px;
 }
 
 .sample-projects {
@@ -279,8 +281,8 @@ a {
     font: inherit;
     font-weight: 700;
     justify-content: center;
-    min-height: 42px;
-    padding: 8px 14px;
+    min-height: 38px;
+    padding: 7px 13px;
     white-space: nowrap;
 }
 
