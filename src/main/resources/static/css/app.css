@@ -199,6 +199,21 @@ a {
     margin: 0;
 }
 
+.sample-guidelines {
+    background: #fffdf5;
+    border-top: 1px solid #efe1b5;
+    display: grid;
+    gap: 4px;
+    padding: 16px clamp(20px, 4vw, 42px);
+}
+
+.sample-guidelines p {
+    color: #5f5032;
+    font-size: 13px;
+    font-weight: 700;
+    margin: 0;
+}
+
 .sample-item {
     align-items: start;
     background: #ffffff;
