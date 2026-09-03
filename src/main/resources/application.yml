@@ -13,6 +13,21 @@ spring:
     open-in-view: false
   thymeleaf:
     cache: false
+  mail:
+    host: ${MAIL_HOST:smtp.mail.yahoo.co.jp}
+    port: ${MAIL_PORT:465}
+    username: ${MAIL_USERNAME:}
+    password: ${MAIL_PASSWORD:}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          ssl:
+            enable: true
+
+contact:
+  to: ${CONTACT_TO:xcyxdm@yahoo.co.jp}
+  from: ${CONTACT_FROM:${MAIL_USERNAME:}}
 
 management:
   endpoints:

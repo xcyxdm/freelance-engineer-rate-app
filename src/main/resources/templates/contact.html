@@ -19,6 +19,7 @@
 
 <main class="container narrow">
     <div class="notice" th:if="${message}" th:text="${message}"></div>
+    <div class="notice error-notice" th:if="${errorMessage}" th:text="${errorMessage}"></div>
 
     <form class="form-panel" th:action="@{/contact}" th:object="${contactForm}" method="post">
         <label>

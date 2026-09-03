@@ -367,6 +367,12 @@ a {
     padding: 12px 14px;
 }
 
+.error-notice {
+    background: #fff0ee;
+    border-color: #f0b4ae;
+    color: var(--danger);
+}
+
 .summary {
     display: grid;
     gap: 16px;

@@ -7,6 +7,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import org.springframework.data.domain.Sort;
+import org.springframework.mail.MailException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -40,9 +41,11 @@ public class InterviewReportController {
     );
 
     private final InterviewReportRepository repository;
+    private final ContactMailService contactMailService;
 
-    public InterviewReportController(InterviewReportRepository repository) {
+    public InterviewReportController(InterviewReportRepository repository, ContactMailService contactMailService) {
         this.repository = repository;
+        this.contactMailService = contactMailService;
     }
 
     @ModelAttribute("contractTypes")
@@ -90,12 +93,19 @@ public class InterviewReportController {
     public String sendContact(
             @Valid @ModelAttribute("contactForm") ContactForm contactForm,
             BindingResult bindingResult,
+            Model model,
             RedirectAttributes redirectAttributes
     ) {
         if (bindingResult.hasErrors()) {
             return "contact";
         }
 
+        try {
+            contactMailService.send(contactForm);
+        } catch (MailException e) {
+            model.addAttribute("errorMessage", "メール送信に失敗しました。時間をおいて再度お試しください。");
+            return "contact";
+        }
         redirectAttributes.addFlashAttribute("message", "お問い合わせを受け付けました。");
         return "redirect:/contact";
     }
