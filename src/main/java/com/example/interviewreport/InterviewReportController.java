@@ -80,6 +80,26 @@ public class InterviewReportController {
         return "resume";
     }
 
+    @GetMapping("/contact")
+    public String contact(Model model) {
+        model.addAttribute("contactForm", new ContactForm());
+        return "contact";
+    }
+
+    @PostMapping("/contact")
+    public String sendContact(
+            @Valid @ModelAttribute("contactForm") ContactForm contactForm,
+            BindingResult bindingResult,
+            RedirectAttributes redirectAttributes
+    ) {
+        if (bindingResult.hasErrors()) {
+            return "contact";
+        }
+
+        redirectAttributes.addFlashAttribute("message", "お問い合わせを受け付けました。");
+        return "redirect:/contact";
+    }
+
     @GetMapping("/rates")
     public String index(
             @RequestParam(required = false) String ageGroup,
