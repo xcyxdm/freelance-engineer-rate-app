@@ -286,6 +286,21 @@ a {
     margin: 0;
 }
 
+.spec-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.spec-links a {
+    color: var(--primary);
+    font-weight: 800;
+}
+
+.spec-links a:hover {
+    color: var(--primary-dark);
+}
+
 .topbar {
     align-items: center;
     background: var(--surface);
